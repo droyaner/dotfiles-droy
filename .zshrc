@@ -41,10 +41,16 @@ zinit light Aloxaf/fzf-tab
 # 4) Plugins that hook into widgets / hints
 zinit light zsh-users/zsh-autosuggestions
 
-# 5) Oh-My-Zsh-style snippets (without fzf to avoid conflicts)
+# 5) fzf binary and shell integration
+zinit ice from"gh-r" as"program"
+zinit light junegunn/fzf
+
+zinit ice multisrc"shell/{completion,key-bindings}.zsh" id-as"junegunn/fzf_completions" pick"/dev/null"
+zinit light junegunn/fzf
+
+# 6) Oh-My-Zsh-style snippets
 zinit snippet OMZL::git.zsh
 zinit snippet OMZP::git
-# zinit snippet OMZP::fzf        # intentionally disabled (fzf-tab is used instead)
 zinit snippet OMZL::functions.zsh
 zinit snippet OMZL::termsupport.zsh
 zinit snippet OMZP::web-search
@@ -163,9 +169,6 @@ alias zmv='noglob zmv -W'
 # =========================
 #   Integrations
 # =========================
-
-# Do NOT call "eval \"$(fzf --zsh)\"" to avoid conflicts with fzf-tab
-# eval "$(fzf --zsh)"
 
 # zoxide: keep normal "cd" behavior, use `z` / completion instead
 eval "$(zoxide init zsh)"

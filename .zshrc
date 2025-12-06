@@ -55,16 +55,23 @@ zinit snippet OMZL::functions.zsh
 zinit snippet OMZL::termsupport.zsh
 zinit snippet OMZP::web-search
 zinit snippet OMZP::sudo
-zinit snippet OMZP::kubectl
-zinit snippet OMZP::kubectx
-zinit snippet OMZP::command-not-found
-zinit snippet OMZP::alias-finder
 
-# Alias-finder configuration
-zstyle ':omz:plugins:alias-finder' autoload yes
-zstyle ':omz:plugins:alias-finder' longer yes
-zstyle ':omz:plugins:alias-finder' exact yes
-zstyle ':omz:plugins:alias-finder' cheaper yes
+# Kubernetes plugins (only if kubectl is installed)
+if command -v kubectl &> /dev/null; then
+  zinit snippet OMZP::kubectl
+  zinit snippet OMZP::kubectx
+fi
+
+zinit snippet OMZP::command-not-found
+
+# Alias-finder (requires Python)
+if command -v python3 &> /dev/null || command -v python &> /dev/null; then
+  zinit snippet OMZP::alias-finder
+  zstyle ':omz:plugins:alias-finder' autoload yes
+  zstyle ':omz:plugins:alias-finder' longer yes
+  zstyle ':omz:plugins:alias-finder' exact yes
+  zstyle ':omz:plugins:alias-finder' cheaper yes
+fi
 
 # 6) zsh-syntax-highlighting MUST be last among plugins/snippets
 zinit light zsh-users/zsh-syntax-highlighting
@@ -151,7 +158,13 @@ zstyle ':fzf-tab:*' switch-group ',' '.'   # switch groups in fzf with , and .
 #   Aliases
 # =========================
 
-alias ls='ls --color'
+# ls with colors (GNU ls uses --color, BSD ls uses -G)
+if ls --color &> /dev/null; then
+  alias ls='ls --color'
+else
+  alias ls='ls -G'
+fi
+
 alias vim='nvim'
 alias c='clear'
 alias g='google'
@@ -171,7 +184,9 @@ alias zmv='noglob zmv -W'
 # =========================
 
 # zoxide: keep normal "cd" behavior, use `z` / completion instead
-eval "$(zoxide init zsh)"
+if command -v zoxide &> /dev/null; then
+  eval "$(zoxide init zsh)"
+fi
 
 # Extra aliases and secrets (optional)
 if [ -f ~/.aliases ]; then
@@ -219,6 +234,7 @@ bindkey '^I' smart_cd_slash   # ^I = TAB
 #   Home Assistant helper
 # =========================
 
+if command -v curl &> /dev/null; then
 ha_trigger() {
   : "${HA_HOST:="http://homeassistant:8123"}"
 
@@ -238,11 +254,17 @@ ha_trigger() {
       return 1
   fi
 }
+fi
 
 # =========================
 #   NVM (Node Version Manager)
 # =========================
 
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+if [ -s "$NVM_DIR/nvm.sh" ]; then
+  # Lazy load NVM for faster shell startup
+  alias nvm='unalias nvm && . "$NVM_DIR/nvm.sh" && nvm'
+  alias node='unalias node && . "$NVM_DIR/nvm.sh" && node'
+  alias npm='unalias npm && . "$NVM_DIR/nvm.sh" && npm'
+fi
 [ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"

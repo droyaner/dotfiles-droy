@@ -183,6 +183,21 @@ alias zmv='noglob zmv -W'
 #   Integrations
 # =========================
 
+# SSH host completion from ~/.ssh/config
+if [[ -r ~/.ssh/config ]]; then
+  h=(${${${(@M)${(f)"$(cat ~/.ssh/config)"}:#Host *}#Host }:#*[*?]*})
+  if [[ ${#h[@]} -gt 0 ]]; then
+    # Disable all default host sources
+    zstyle ':completion:*:(ssh|scp|sftp):*' tag-order hosts
+    zstyle ':completion:*:(ssh|scp|sftp):*' group-name ''
+    # Only use our config hosts
+    zstyle ':completion:*:ssh:*' hosts $h
+    zstyle ':completion:*:scp:*' hosts $h
+    zstyle ':completion:*:sftp:*' hosts $h
+  fi
+  unset h
+fi
+
 # zoxide: keep normal "cd" behavior, use `z` / completion instead
 if command -v zoxide &> /dev/null; then
   eval "$(zoxide init zsh)"

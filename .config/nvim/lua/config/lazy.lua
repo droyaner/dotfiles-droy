@@ -18,19 +18,17 @@ vim.opt.rtp:prepend(lazypath)
 -- Setup lazy.nvim
 require("lazy").setup({
   spec = {
-    -- my plugins
-    {"folke/tokyonight.nvim", lazy = false, priority = 1000, opts = {}},
-    {"ibhagwan/fzf-lua", dependencies = { "nvim-tree/nvim-web-devicons" },opts = {}},
-    {"nvim-tree/nvim-tree.lua", version = "*", lazy = false, dependencies = {"nvim-tree/nvim-web-devicons"},
-       config = function()
-       require("nvim-tree").setup {}
-       end,
-    },
-    {'akinsho/bufferline.nvim', version = "*", dependencies = 'nvim-tree/nvim-web-devicons'},
+    -- Import all plugins from lua/plugins/*.lua
+    { import = "plugins" },
   },
-  -- Configure any other settings here. See the documentation for more details.
-  -- colorscheme that will be used when installing plugins.
-  install = { colorscheme = { "habamax" } },
-  -- automatically check for plugin updates
-  checker = { enabled = true },
+  -- Performance: Don't check for updates automatically to speed up startup
+  checker = { enabled = false },
+  -- Use lockfile for reproducible installs
+  lockfile = vim.fn.stdpath("config") .. "/lazy-lock.json",
+  -- Install colorscheme fallback
+  install = { colorscheme = { "tokyonight", "habamax" } },
+  -- UI settings
+  ui = {
+    border = "rounded",
+  },
 })

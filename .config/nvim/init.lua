@@ -1,6 +1,4 @@
-require("keymaps")
-require("options")
-
-require("config.lazy")
+-- Load config modules
 require("config.options")
 require("config.keymaps")
+require("config.lazy")

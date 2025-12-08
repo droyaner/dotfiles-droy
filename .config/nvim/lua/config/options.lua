@@ -1,4 +1,4 @@
-vim.cmd("colorscheme tokyonight-moon") -- set color theme
+-- Enable true colors for better theming
+vim.opt.termguicolors = true
 
--- vim.opt.termguicolors = true --bufferline
-require("bufferline").setup{} --bufferline
+-- Colorscheme is set in lua/plugins/ui.lua

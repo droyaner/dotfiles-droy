@@ -29,6 +29,8 @@ return {
         { "<leader>c", group = "Copilot" },
         { "<leader>w", group = "Windows" },
         { "<leader>b", group = "Buffers" },
+        { "<leader>g", group = "Git" },
+        { "<leader>gt", group = "Git Toggle" },
         { "<leader>e", desc = "File Explorer" },
         { "g", group = "Go to (LSP)" },
         { "[", group = "Previous" },

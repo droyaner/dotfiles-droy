@@ -6,6 +6,15 @@ vim.keymap.set("n", "<leader>fo", ":FzfLua oldfiles<cr>")
 -- tree
 vim.keymap.set("n", "<leader>e", ":NvimTreeFindFileToggle<cr>")
 
+-- Buffer navigation
+vim.keymap.set("n", "<leader>bn", ":bnext<cr>", { desc = "Next buffer" })
+vim.keymap.set("n", "<leader>bp", ":bprevious<cr>", { desc = "Previous buffer" })
+vim.keymap.set("n", "<leader>bd", ":bdelete<cr>", { desc = "Delete buffer" })
+vim.keymap.set("n", "<leader>bb", ":FzfLua buffers<cr>", { desc = "List buffers" })
+-- Quick buffer switching
+vim.keymap.set("n", "<Tab>", ":bnext<cr>", { desc = "Next buffer" })
+vim.keymap.set("n", "<S-Tab>", ":bprevious<cr>", { desc = "Previous buffer" })
+
 -- Window navigation
 vim.keymap.set("n", "<leader>wh", "<C-w>h", { desc = "Window left" })
 vim.keymap.set("n", "<leader>wj", "<C-w>j", { desc = "Window down" })

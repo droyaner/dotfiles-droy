@@ -277,9 +277,13 @@ fi
 
 export NVM_DIR="$HOME/.nvm"
 if [ -s "$NVM_DIR/nvm.sh" ]; then
-  # Lazy load NVM for faster shell startup
-  alias nvm='unalias nvm && . "$NVM_DIR/nvm.sh" && nvm'
-  alias node='unalias node && . "$NVM_DIR/nvm.sh" && node'
-  alias npm='unalias npm && . "$NVM_DIR/nvm.sh" && npm'
+  # Unset any existing nvm aliases before loading
+  unalias nvm 2>/dev/null
+  unalias node 2>/dev/null
+  unalias npm 2>/dev/null
+  
+  # Load NVM normally (needed for Neovim Copilot)
+  . "$NVM_DIR/nvm.sh"
+  [ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"
 fi
 [ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"

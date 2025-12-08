@@ -1,3 +1,7 @@
+-- Leader key
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
+
 -- Enable true colors for better theming
 vim.opt.termguicolors = true
 

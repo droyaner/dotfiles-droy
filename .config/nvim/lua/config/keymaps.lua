@@ -6,6 +6,17 @@ vim.keymap.set("n", "<leader>fo", ":FzfLua oldfiles<cr>")
 -- tree
 vim.keymap.set("n", "<leader>e", ":NvimTreeFindFileToggle<cr>")
 
+-- Window navigation
+vim.keymap.set("n", "<leader>wh", "<C-w>h", { desc = "Window left" })
+vim.keymap.set("n", "<leader>wj", "<C-w>j", { desc = "Window down" })
+vim.keymap.set("n", "<leader>wk", "<C-w>k", { desc = "Window up" })
+vim.keymap.set("n", "<leader>wl", "<C-w>l", { desc = "Window right" })
+vim.keymap.set("n", "<leader>ws", "<C-w>s", { desc = "Split horizontal" })
+vim.keymap.set("n", "<leader>wv", "<C-w>v", { desc = "Split vertical" })
+vim.keymap.set("n", "<leader>wq", "<C-w>q", { desc = "Close window" })
+vim.keymap.set("n", "<leader>wo", "<C-w>o", { desc = "Close other windows" })
+vim.keymap.set("n", "<leader>w=", "<C-w>=", { desc = "Equal window sizes" })
+
 -- Copilot Chat
 vim.keymap.set("n", "<leader>cc", function() require("CopilotChat").open() end, { desc = "CopilotChat - Open" })
 vim.keymap.set("n", "<leader>ct", function() require("CopilotChat").toggle() end, { desc = "CopilotChat - Toggle" })

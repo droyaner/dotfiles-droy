@@ -27,6 +27,7 @@ return {
       wk.add({
         { "<leader>f", group = "Find (FZF)" },
         { "<leader>c", group = "Copilot" },
+        { "<leader>w", group = "Windows" },
         { "<leader>e", desc = "File Explorer" },
         { "g", group = "Go to (LSP)" },
         { "[", group = "Previous" },

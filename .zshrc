@@ -217,8 +217,10 @@ fi
 #   - Keep fzf-tab behavior
 #   - Add:
 #       cd ..<TAB>      -> cd ../
-#       cd ../..<TAB>   -> cd ../../
-#       cd ../../..<TAB> -> cd ../../../
+#       cp file ..<TAB> -> cp file ../
+#       mv src ..<TAB>  -> mv src ../
+#       rm ..<TAB>      -> rm ../
+#       Works for any command that accepts paths
 # =========================
 
 # Remember whatever widget TAB is currently bound to (fzf-tab or default)
@@ -226,13 +228,16 @@ if [[ -z $SMART_TAB_ORIG_WIDGET ]]; then
   SMART_TAB_ORIG_WIDGET=${${"$(bindkey '^I')"##* }:-expand-or-complete}
 fi
 
-smart_cd_slash() {
+smart_path_slash() {
   emulate -L zsh
   setopt localoptions
 
-  # If the line starts with "cd ", cursor is at end, and buffer ends with "..",
-  # append a slash. This covers "cd ..", "cd ../..", "cd ../../..", etc.
-  if [[ $BUFFER == cd\ * && $CURSOR -eq ${#BUFFER} && $BUFFER == *.. ]]; then
+  # Get the word under/before the cursor
+  local word="${LBUFFER##* }"
+  
+  # If cursor is at end of line and the last word ends with "..",
+  # append a slash. Works for: cd .., cp file .., mv src .., etc.
+  if [[ $CURSOR -eq ${#BUFFER} && $word == *.. ]]; then
     BUFFER+="/"
     (( CURSOR++ ))
     return
@@ -242,8 +247,8 @@ smart_cd_slash() {
   zle "$SMART_TAB_ORIG_WIDGET"
 }
 
-zle -N smart_cd_slash
-bindkey '^I' smart_cd_slash   # ^I = TAB
+zle -N smart_path_slash
+bindkey '^I' smart_path_slash   # ^I = TAB
 
 # =========================
 #   Home Assistant helper

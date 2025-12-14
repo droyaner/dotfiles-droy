@@ -5,6 +5,9 @@ vim.g.maplocalleader = " "
 -- Enable true colors for better theming
 vim.opt.termguicolors = true
 
+-- Use system clipboard by default
+vim.opt.clipboard = "unnamedplus"
+
 -- Show whitespace characters
 vim.opt.list = true
 vim.opt.listchars = {

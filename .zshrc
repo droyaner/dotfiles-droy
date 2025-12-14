@@ -203,6 +203,28 @@ if command -v zoxide &> /dev/null; then
   eval "$(zoxide init zsh)"
 fi
 
+# =========================
+#   FZF power functions
+# =========================
+
+# Kill process with fzf
+fkill() {
+  local pid
+  pid=$(ps -ef | sed 1d | fzf -m --preview 'echo {}' --preview-window down:3:wrap | awk '{print $2}')
+  if [ -n "$pid" ]; then
+    echo "$pid" | xargs kill -${1:-9}
+  fi
+}
+
+# Git checkout branch with fzf
+fgb() {
+  local branch
+  branch=$(git branch -a | grep -v HEAD | sed 's/^[* ]*//' | sed 's#remotes/origin/##' | sort -u | fzf --preview 'git log --oneline --graph --date=short --pretty="format:%C(auto)%cd %h%d %s" {}')
+  if [ -n "$branch" ]; then
+    git checkout "$branch"
+  fi
+}
+
 # Extra aliases and secrets (optional)
 if [ -f ~/.aliases ]; then
   . ~/.aliases

@@ -91,7 +91,11 @@ zinit cdreplay -q
 bindkey -e
 bindkey '^p' history-search-backward
 bindkey '^n' history-search-forward
-bindkey '^[w' kill-region
+
+# Word operations
+bindkey '^[[1;5C' forward-word         # Ctrl+Right: Word forward
+bindkey '^[[1;5D' backward-word        # Ctrl+Left: Word backward
+
 
 # =========================
 #   History configuration

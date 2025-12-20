@@ -13,8 +13,8 @@ return {
             accept = "<M-l>",      -- Alt+l to accept
             accept_word = "<M-w>", -- Alt+w to accept word
             accept_line = "<M-j>", -- Alt+j to accept line
-            next = "<M-]>",        -- Alt+] next suggestion
-            prev = "<M-[>",        -- Alt+[ previous suggestion
+            next = "<M-n>",        -- Alt+n next suggestion
+            prev = "<M-p>",        -- Alt+p previous suggestion
             dismiss = "<C-]>",     -- Ctrl+] dismiss
           },
         },

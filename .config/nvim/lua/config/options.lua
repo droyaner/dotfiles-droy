@@ -8,6 +8,10 @@ vim.opt.termguicolors = true
 -- Use system clipboard by default
 vim.opt.clipboard = "unnamedplus"
 
+-- Line numbers
+vim.opt.number = true
+vim.opt.relativenumber = true
+
 -- Show whitespace characters
 vim.opt.list = true
 vim.opt.listchars = {

@@ -48,6 +48,22 @@ zinit light junegunn/fzf
 zinit ice multisrc"shell/{completion,key-bindings}.zsh" id-as"junegunn/fzf_completions" pick"/dev/null"
 zinit light junegunn/fzf
 
+# =========================
+#   NixOS Plugins
+# =========================
+
+# Nix aliases (manual, as zinit snippet failed)
+# Uses $(hostname) to automatically select the configuration for the current machine
+alias nrb='sudo nixos-rebuild build --flake .#$(hostname)'
+alias nrs='sudo nixos-rebuild switch --flake .#$(hostname)'
+alias nrt='sudo nixos-rebuild test --flake .#$(hostname)'
+alias nrd='sudo nixos-rebuild dry-build --flake .#$(hostname)'
+alias nre='sudo nixos-rebuild edit --flake .#$(hostname)'
+alias nrg='sudo nix-collect-garbage -d'
+
+# zsh-nix-shell: Use Zsh in nix-shell
+zinit light chisui/zsh-nix-shell
+
 # 6) Oh-My-Zsh-style snippets
 zinit snippet OMZL::git.zsh
 zinit snippet OMZP::git

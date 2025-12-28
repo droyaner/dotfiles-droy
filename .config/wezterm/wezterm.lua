@@ -4,8 +4,13 @@ local wezterm = require("wezterm")
 -- This will hold the configuration.
 local config = wezterm.config_builder()
 
-config.default_prog = { "/usr/bin/zsh" }
+-- Force X11 (XWayland)
+config.enable_wayland = false
 
+-- Disable audible bell
+config.audible_bell = "Disabled"
+
+-- Leader key
 config.leader = { key = 'Space', mods = 'CTRL', timeout_milliseconds = 2000 }
 
 config.keys = {

@@ -33,11 +33,11 @@ config.keys = {
     { key = 'K', mods = 'CTRL|ALT|SHIFT', action = wezterm.action.AdjustPaneSize{ 'Up', 2 } },
     { key = 'J', mods = 'CTRL|ALT|SHIFT', action = wezterm.action.AdjustPaneSize{ 'Down', 2 } },
 
-    -- Modi
+    -- Modes
     { key = 'c', mods = 'LEADER', action = wezterm.action.ActivateCopyMode },
     { key = 'f', mods = 'LEADER', action = wezterm.action.Search { Regex = '' } },
     
-    -- QuickSelect (URLs oder Pfade markieren)
+    -- QuickSelect (mark URLs or paths)
     { key = ' ', mods = 'LEADER', action = wezterm.action.QuickSelect },
 
 }

@@ -61,6 +61,7 @@ alias nrd='sudo nixos-rebuild dry-build --flake .#$(hostname)'
 alias nre='sudo nixos-rebuild edit --flake .#$(hostname)'
 alias nrg='sudo nix-collect-garbage -d'
 
+
 # zsh-nix-shell: Use Zsh in nix-shell
 zinit light chisui/zsh-nix-shell
 
@@ -186,6 +187,7 @@ else
 fi
 
 alias vim='nvim'
+alias n='nvim'
 alias c='clear'
 alias g='google'
 alias py='python'

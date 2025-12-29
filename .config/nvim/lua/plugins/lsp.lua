@@ -24,11 +24,14 @@ return {
     dependencies = { "williamboman/mason.nvim" },
     config = function()
       require("mason-lspconfig").setup({
-        -- Automatically install these LSP servers
+        -- Automatically install these LSP servers for non-NixOS users
         ensure_installed = {
-          "pyright",      -- Python
-          "clangd",       -- C/C++
-          -- gdscript is NOT installed via Mason (comes with Godot)
+          "pyright",       -- Python
+          "clangd",        -- C/C++
+          "lua_ls",        -- Lua
+          "gopls",         -- Go
+          "rust_analyzer", -- Rust
+          -- "gdscript",   -- Godot (not in Mason)
         },
         automatic_installation = true,
       })
@@ -38,7 +41,7 @@ return {
   -- LSP Config
   {
     "neovim/nvim-lspconfig",
-    version = "v1.0.0", -- Pin to stable version before deprecation
+    version = "*", -- Use latest version to avoid deprecated vim.validate
     dependencies = {
       "williamboman/mason.nvim",
       "williamboman/mason-lspconfig.nvim",

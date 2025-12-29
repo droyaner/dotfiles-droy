@@ -48,4 +48,16 @@ return {
     version = "*",
     lazy = true,
   },
+
+  -- Mini Icons (New standard for icons in Neovim)
+  {
+    "echasnovski/mini.icons",
+    version = "*",
+    lazy = false, -- Load immediately to ensure mocking works before other plugins load
+    config = function()
+      require("mini.icons").setup()
+      -- Mock nvim-web-devicons for compatibility
+      require("mini.icons").mock_nvim_web_devicons()
+    end,
+  },
 }

@@ -1,0 +1,29 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.5.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-yaml
+      - id: check-added-large-files
+
+  - repo: https://github.com/koalaman/shellcheck-precommit
+    rev: v0.9.0
+    hooks:
+      - id: shellcheck
+        args: ["--severity=warning"]
+        exclude: \.zshrc$ # ShellCheck unterstützt kein Zsh
+
+  - repo: local
+    hooks:
+      - id: zsh-syntax-check
+        name: Zsh Syntax Check
+        entry: zsh -n
+        language: system
+        files: \.zshrc$|\.zsh$
+
+  - repo: https://github.com/JohnnyMorganz/stylua
+    rev: v0.20.0
+    hooks:
+      - id: stylua
+        # Konfiguriere stylua hier oder in stylua.toml

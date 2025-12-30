@@ -15,11 +15,11 @@ vim.opt.relativenumber = true
 -- Show whitespace characters
 vim.opt.list = true
 vim.opt.listchars = {
-  tab = "→ ",       -- Show tabs as →
-  trail = "·",      -- Show trailing spaces as ·
-  nbsp = "␣",       -- Show non-breaking spaces
-  extends = "⟩",    -- Show when line continues beyond screen
-  precedes = "⟨",   -- Show when line starts before screen
+	tab = "→ ", -- Show tabs as →
+	trail = "·", -- Show trailing spaces as ·
+	nbsp = "␣", -- Show non-breaking spaces
+	extends = "⟩", -- Show when line continues beyond screen
+	precedes = "⟨", -- Show when line starts before screen
 }
 
 -- Colorscheme is set in lua/plugins/ui.lua

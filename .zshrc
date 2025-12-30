@@ -59,6 +59,7 @@ alias nrs='sudo nixos-rebuild switch --flake .#$(hostname)'
 alias nrt='sudo nixos-rebuild test --flake .#$(hostname)'
 alias nrd='sudo nixos-rebuild dry-build --flake .#$(hostname)'
 alias nre='sudo nixos-rebuild edit --flake .#$(hostname)'
+alias nru='nix flake update && nrs'
 alias nrg='sudo nix-collect-garbage -d'
 
 
@@ -278,7 +279,7 @@ smart_path_slash() {
 
   # Get the word under/before the cursor
   local word="${LBUFFER##* }"
-  
+
   # If cursor is at end of line and the last word ends with "..",
   # append a slash. Works for: cd .., cp file .., mv src .., etc.
   if [[ $CURSOR -eq ${#BUFFER} && $word == *.. ]]; then
@@ -330,7 +331,7 @@ if [ -s "$NVM_DIR/nvm.sh" ]; then
   unalias nvm 2>/dev/null
   unalias node 2>/dev/null
   unalias npm 2>/dev/null
-  
+
   # Load NVM normally (needed for Neovim Copilot)
   . "$NVM_DIR/nvm.sh"
   [ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"

@@ -25,5 +25,3 @@ vim.keymap.set("n", "<leader>wv", "<C-w>v", { desc = "Split vertical" })
 vim.keymap.set("n", "<leader>wq", "<C-w>q", { desc = "Close window" })
 vim.keymap.set("n", "<leader>wo", "<C-w>o", { desc = "Close other windows" })
 vim.keymap.set("n", "<leader>w=", "<C-w>=", { desc = "Equal window sizes" })
-
-

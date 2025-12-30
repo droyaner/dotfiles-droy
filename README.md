@@ -30,4 +30,3 @@ ZSH: zinit, Powerlevel10k, fzf
 ## Troubleshooting
 
 Clipboard error: Install xclip (X11) or wl-clipboard (Wayland), then restart Neovim.
-

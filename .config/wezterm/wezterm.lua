@@ -4,13 +4,9 @@ local wezterm = require("wezterm")
 -- This will hold the configuration.
 local config = wezterm.config_builder()
 
--- Force X11 (XWayland)
-config.enable_wayland = false
+-- Verwende die Standard-Shell des Users (funktioniert auf NixOS und anderen Systemen)
+-- config.default_prog wird nicht gesetzt, damit wezterm automatisch die User-Shell verwendet
 
--- Disable audible bell
-config.audible_bell = "Disabled"
-
--- Leader key
 config.leader = { key = "Space", mods = "CTRL", timeout_milliseconds = 2000 }
 
 config.keys = {
@@ -33,11 +29,11 @@ config.keys = {
 	{ key = "K", mods = "CTRL|ALT|SHIFT", action = wezterm.action.AdjustPaneSize({ "Up", 2 }) },
 	{ key = "J", mods = "CTRL|ALT|SHIFT", action = wezterm.action.AdjustPaneSize({ "Down", 2 }) },
 
-	-- Modes
+	-- Modi
 	{ key = "c", mods = "LEADER", action = wezterm.action.ActivateCopyMode },
 	{ key = "f", mods = "LEADER", action = wezterm.action.Search({ Regex = "" }) },
 
-	-- QuickSelect (mark URLs or paths)
+	-- QuickSelect (URLs oder Pfade markieren)
 	{ key = " ", mods = "LEADER", action = wezterm.action.QuickSelect },
 }
 
@@ -62,5 +58,11 @@ config.font_size = 10
 
 config.window_decorations = "RESIZE"
 config.window_background_opacity = 0.99
+
+-- Start Wezterm maximized
+wezterm.on("gui-startup", function(cmd)
+	local tab, pane, window = wezterm.mux.spawn_window(cmd or {})
+	window:gui_window():maximize()
+end)
 
 return config

@@ -56,7 +56,7 @@ config.font = wezterm.font("Inconsolata")
 
 config.font_size = 10
 
-config.window_decorations = "RESIZE"
+config.window_decorations = "TITLE | RESIZE"
 config.window_background_opacity = 0.99
 
 -- Start Wezterm maximized

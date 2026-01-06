@@ -59,10 +59,14 @@ config.font_size = 10
 config.window_decorations = "TITLE | RESIZE"
 config.window_background_opacity = 0.99
 
--- Start Wezterm maximized
-wezterm.on("gui-startup", function(cmd)
-	local tab, pane, window = wezterm.mux.spawn_window(cmd or {})
-	window:gui_window():maximize()
+-- Always start windows maximized
+wezterm.on("gui-attached", function(domain)
+	local workspace = wezterm.mux.get_active_workspace()
+	for _, window in ipairs(wezterm.mux.all_windows()) do
+		if window:gui_window() then
+			window:gui_window():maximize()
+		end
+	end
 end)
 
 return config

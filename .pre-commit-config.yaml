@@ -12,7 +12,7 @@ repos:
     hooks:
       - id: shellcheck
         args: ["--severity=warning"]
-        exclude: \.zshrc$ # ShellCheck unterstützt kein Zsh
+        exclude: (\.zshrc|\.p10k\.zsh)$ # ShellCheck unterstützt kein Zsh
 
   - repo: local
     hooks:

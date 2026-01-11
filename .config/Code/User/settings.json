@@ -1,0 +1,5 @@
+{
+    "github.copilot.nextEditSuggestions.enabled": true,
+    "explorer.confirmDelete": false,
+    "vim.useSystemClipboard": true
+}

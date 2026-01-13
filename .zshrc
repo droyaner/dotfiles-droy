@@ -202,6 +202,8 @@ alias cp='cp -i'
 autoload -Uz zmv
 alias zmv='noglob zmv -W'
 
+alias lg='lazygit'
+
 # =========================
 #   Integrations
 # =========================

@@ -52,19 +52,21 @@ zinit light junegunn/fzf
 #   NixOS Plugins
 # =========================
 
-# Nix aliases (manual, as zinit snippet failed)
-# Uses $(hostname) to automatically select the configuration for the current machine
-alias nrb='sudo nixos-rebuild build --flake .#$(hostname)'
-alias nrs='sudo nixos-rebuild switch --flake .#$(hostname)'
-alias nrt='sudo nixos-rebuild test --flake .#$(hostname)'
-alias nrd='sudo nixos-rebuild dry-build --flake .#$(hostname)'
-alias nre='sudo nixos-rebuild edit --flake .#$(hostname)'
-alias nru='nix flake update && nrs'
-alias nrg='sudo nix-collect-garbage -d'
+# Only load NixOS-specific configuration on NixOS
+if [[ -f /etc/NIXOS ]] || command -v nixos-version &> /dev/null; then
+  # Nix aliases (manual, as zinit snippet failed)
+  # Uses $(hostname) to automatically select the configuration for the current machine
+  alias nrb='sudo nixos-rebuild build --flake .#$(hostname)'
+  alias nrs='sudo nixos-rebuild switch --flake .#$(hostname)'
+  alias nrt='sudo nixos-rebuild test --flake .#$(hostname)'
+  alias nrd='sudo nixos-rebuild dry-build --flake .#$(hostname)'
+  alias nre='sudo nixos-rebuild edit --flake .#$(hostname)'
+  alias nru='nix flake update && nrs'
+  alias nrg='sudo nix-collect-garbage -d'
 
-
-# zsh-nix-shell: Use Zsh in nix-shell
-zinit light chisui/zsh-nix-shell
+  # zsh-nix-shell: Use Zsh in nix-shell
+  zinit light chisui/zsh-nix-shell
+fi
 
 # 6) Oh-My-Zsh-style snippets
 zinit snippet OMZL::git.zsh
@@ -339,3 +341,27 @@ if [ -s "$NVM_DIR/nvm.sh" ]; then
   [ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"
 fi
 [ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"
+
+# =========================
+#   direnv Auto-Allow (NixOS only)
+# =========================
+
+# Only auto-allow direnv on NixOS
+if [[ -f /etc/NIXOS ]] || command -v nixos-version &> /dev/null; then
+  if command -v direnv &> /dev/null; then
+    # Automatically allow .envrc files when entering a directory
+    _direnv_auto_allow() {
+      if [[ -f .envrc ]]; then
+        if ! direnv status 2>/dev/null | grep -q "Found RC allowed true"; then
+          echo "Auto-allowing .envrc in $(pwd)"
+          direnv allow
+        fi
+      fi
+    }
+
+    # Run on directory change and on shell startup
+    autoload -U add-zsh-hook
+    add-zsh-hook chpwd _direnv_auto_allow
+    _direnv_auto_allow
+  fi
+fi

@@ -334,10 +334,6 @@ fi
 # Source Home Assistant CLI configuration (main machine only)
 if [[ -f ~/.zshrc-hass ]]; then
   source ~/.zshrc-hass
-  alias ha0='hass-cli service call automation.trigger --arguments entity_id=automation.schrank_dimmer_ausschalten > /dev/null'
-  alias ha1='hass-cli service call automation.trigger --arguments entity_id=automation.schrank_dimmer_ausschalten_konti > /dev/null'
-  alias ha2='hass-cli service call automation.trigger --arguments entity_id=automation.schrank_dimmer_einschalten_konti > /dev/null'
-  alias ha3='hass-cli service call automation.trigger --arguments entity_id=automation.schrank_dimmer_einschalten > /dev/null'
 fi
 
 typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet

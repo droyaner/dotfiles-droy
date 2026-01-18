@@ -330,3 +330,13 @@ fi
 if [[ -f ~/.zshrc-nix ]]; then
   source ~/.zshrc-nix
 fi
+
+# Source Home Assistant CLI configuration (main machine only)
+if [[ -f ~/.zshrc-hass ]]; then
+  source ~/.zshrc-hass
+fi
+
+typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
+
+# Suppress Powerlevel10k instant prompt warning
+typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet

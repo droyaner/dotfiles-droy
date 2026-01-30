@@ -15,14 +15,21 @@ return {
 
 	-- File explorer
 	{
-		"nvim-tree/nvim-tree.lua",
+		"stevearc/oil.nvim",
 		version = "*",
 		lazy = false,
-		dependencies = {
-			"nvim-tree/nvim-web-devicons",
-		},
 		config = function()
-			require("nvim-tree").setup({})
+			require("oil").setup({
+				columns = { "icon" },
+				keymaps = {
+					["<C-h>"] = false,
+					["<C-l>"] = false,
+					["<C-k>"] = "actions.preview",
+					["<C-c>"] = "actions.close",
+				},
+			})
+			-- Keymap to open oil
+			vim.keymap.set("n", "-", "<CMD>Oil<CR>", { noremap = true, silent = true })
 		end,
 	},
 

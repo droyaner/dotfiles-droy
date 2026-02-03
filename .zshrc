@@ -64,6 +64,11 @@ fi
 
 zinit snippet OMZP::command-not-found
 
+# Direnv plugin (only if direnv is installed)
+if command -v direnv &> /dev/null; then
+  zinit snippet OMZP::direnv
+fi
+
 # Alias-finder (requires Python)
 if command -v python3 &> /dev/null || command -v python &> /dev/null; then
   zinit snippet OMZP::alias-finder

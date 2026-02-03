@@ -1,5 +1,6 @@
 {
     "github.copilot.nextEditSuggestions.enabled": true,
     "explorer.confirmDelete": false,
-    "vim.useSystemClipboard": true
+    "vim.useSystemClipboard": true,
+    "terminal.integrated.defaultProfile.linux": "zsh"
 }

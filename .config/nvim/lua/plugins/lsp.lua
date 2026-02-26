@@ -38,17 +38,15 @@ return {
 		end,
 	},
 
-	-- LSP Config
+	-- LSP Config (provides default server configurations)
 	{
 		"neovim/nvim-lspconfig",
-		version = "*", -- Use latest version to avoid deprecated vim.validate
+		version = "*",
 		dependencies = {
 			"williamboman/mason.nvim",
 			"williamboman/mason-lspconfig.nvim",
 		},
 		config = function()
-			local lspconfig = require("lspconfig")
-
 			-- Diagnostic configuration
 			vim.diagnostic.config({
 				virtual_text = true,
@@ -90,7 +88,7 @@ return {
 			})
 
 			-- Python (pyright)
-			lspconfig.pyright.setup({
+			vim.lsp.config("pyright", {
 				settings = {
 					python = {
 						analysis = {
@@ -103,7 +101,7 @@ return {
 			})
 
 			-- C/C++ (clangd)
-			lspconfig.clangd.setup({
+			vim.lsp.config("clangd", {
 				cmd = {
 					"clangd",
 					"--background-index",
@@ -113,6 +111,9 @@ return {
 					"--function-arg-placeholders",
 				},
 			})
+
+			-- Enable all configured LSP servers
+			vim.lsp.enable({ "pyright", "clangd" })
 		end,
 	},
 

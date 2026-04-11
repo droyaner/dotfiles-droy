@@ -4,10 +4,10 @@ local wezterm = require("wezterm")
 -- This will hold the configuration.
 local config = wezterm.config_builder()
 
--- Verwende die Standard-Shell des Users (funktioniert auf NixOS und anderen Systemen)
--- config.default_prog wird nicht gesetzt, damit wezterm automatisch die User-Shell verwendet
-
 config.leader = { key = "Space", mods = "CTRL", timeout_milliseconds = 2000 }
+
+-- Nvidia not fully support GPU acc
+config.front_end = "Software"
 
 config.keys = {
 	-- Split
@@ -49,12 +49,9 @@ config.colors = {
 	brights = { "#214969", "#E52E2E", "#44FFB1", "#FFE073", "#A277FF", "#a277ff", "#24EAF7", "#24EAF7" },
 }
 
--- config.font = wezterm.font("JetBrains Mono")
--- config.font = wezterm.font("Fira Code")
--- config.font = wezterm.font ("Iosevka")
 config.font = wezterm.font("Inconsolata")
 
-config.font_size = 10
+config.font_size = 11
 
 config.window_decorations = "TITLE | RESIZE"
 config.window_background_opacity = 0.99

@@ -6,8 +6,20 @@ local config = wezterm.config_builder()
 
 config.leader = { key = "Space", mods = "CTRL", timeout_milliseconds = 2000 }
 
--- Nvidia not fully support GPU acc
-config.front_end = "Software"
+-- Use Software renderer for Nvidia (broken GPU acc), WebGpu for everything else
+local has_nvidia = false
+for _, gpu in ipairs(wezterm.gui.enumerate_gpus()) do
+	if gpu.name:lower():find("nvidia") then
+		has_nvidia = true
+		break
+	end
+end
+
+if has_nvidia then
+	config.front_end = "Software"
+else
+	config.front_end = "WebGpu"
+end
 
 config.keys = {
 	-- Split

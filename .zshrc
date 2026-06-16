@@ -2,6 +2,8 @@
 #   Powerlevel10k instant prompt
 #   (must stay near the top)
 # =========================
+typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
+
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
@@ -87,7 +89,11 @@ zinit cdreplay -q
 # =========================
 #   Powerlevel10k user config
 # =========================
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+if [[ -r "${HOME}/.p10k.zsh" ]]; then
+  source "${HOME}/.p10k.zsh"
+elif [[ -r "${HOME}/workspace/nix-droy/dotfiles/.p10k.zsh" ]]; then
+  source "${HOME}/workspace/nix-droy/dotfiles/.p10k.zsh"
+fi
 
 # =========================
 #   Keybindings
@@ -340,8 +346,3 @@ fi
 if [[ -f ~/.zshrc-hass ]]; then
   source ~/.zshrc-hass
 fi
-
-typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
-
-# Suppress Powerlevel10k instant prompt warning
-typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet

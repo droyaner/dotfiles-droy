@@ -1,7 +1,25 @@
 -- fzf lua
-vim.keymap.set("n", "<leader>fs", ":FzfLua files<cr>")
-vim.keymap.set("n", "<leader>fz", ":FzfLua live_grep<cr>")
-vim.keymap.set("n", "<leader>fo", ":FzfLua oldfiles<cr>")
+local function current_file_dir()
+	local file_name = vim.api.nvim_buf_get_name(0)
+	if file_name == "" then
+		return (vim.uv or vim.loop).cwd()
+	end
+
+	return vim.fs.dirname(file_name)
+end
+
+vim.keymap.set("n", "<leader>fs", function()
+	require("fzf-lua").files()
+end, { desc = "Files (project)" })
+vim.keymap.set("n", "<leader>ff", function()
+	require("fzf-lua").files({ cwd = current_file_dir(), cwd_prompt = false })
+end, { desc = "Files (current directory)" })
+vim.keymap.set("n", "<leader>fz", function()
+	require("fzf-lua").live_grep()
+end, { desc = "Live grep" })
+vim.keymap.set("n", "<leader>fo", function()
+	require("fzf-lua").oldfiles()
+end, { desc = "Old files" })
 
 -- tree
 vim.keymap.set("n", "<leader>e", ":NvimTreeFindFileToggle<cr>")

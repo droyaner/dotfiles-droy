@@ -112,8 +112,7 @@ return {
 				},
 			})
 
-			-- Enable all configured LSP servers
-			vim.lsp.enable({ "pyright", "clangd" })
+			-- Servers stay configured, but they are started manually per buffer.
 		end,
 	},
 

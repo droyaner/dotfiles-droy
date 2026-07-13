@@ -27,10 +27,32 @@ return {
 			wk.add({
 				{ "<leader>f", group = "Find (FZF)" },
 				{ "<leader>c", group = "Copilot" },
+				{ "<leader>l", group = "LSP" },
 				{ "<leader>w", group = "Windows" },
 				{ "<leader>b", group = "Buffers" },
 				{ "<leader>g", group = "Git" },
 				{ "<leader>gt", group = "Git Toggle" },
+				{
+					"<leader>ls",
+					function()
+						vim.cmd("LspStart")
+					end,
+					desc = "Start LSP for current buffer",
+				},
+				{
+					"<leader>lS",
+					function()
+						vim.cmd("LspStop")
+					end,
+					desc = "Stop LSP for current buffer",
+				},
+				{
+					"<leader>li",
+					function()
+						vim.cmd("LspInfo")
+					end,
+					desc = "Show LSP info",
+				},
 				{ "<leader>gs", desc = "Stage hunk", mode = { "n", "v" } },
 				{ "<leader>gr", desc = "Reset hunk", mode = { "n", "v" } },
 				{ "<leader>gS", desc = "Stage buffer" },

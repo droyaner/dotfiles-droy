@@ -1,4 +1,27 @@
 return {
+	-- Git wrapper and advanced Git commands
+	{
+		"tpope/vim-fugitive",
+		dependencies = {
+			"tpope/vim-rhubarb",
+		},
+		cmd = {
+			"Git",
+			"G",
+			"Gdiffsplit",
+			"Gvdiffsplit",
+			"Gread",
+			"Gwrite",
+			"Ggrep",
+			"GMove",
+			"GRename",
+			"GDelete",
+			"GBrowse",
+			"GRemove",
+			"GBlame",
+		},
+	},
+
 	-- Git signs in the gutter
 	{
 		"lewis6991/gitsigns.nvim",

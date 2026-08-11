@@ -182,6 +182,8 @@ fi
 
 alias vim='nvim'
 alias n='nvim'
+alias ni='nvim "$(fzf --height=100% --layout=reverse --border --preview="bat --style=numbers --color=always --line-range :500 {}" --preview-window=right:60%)"'
+
 alias c='clear'
 alias g='google'
 alias py='python'
@@ -218,7 +220,7 @@ fi
 
 # zoxide: keep normal "cd" behavior, use `z` / completion instead
 if command -v zoxide &> /dev/null; then
-  eval "$(zoxide init zsh)"
+  eval "$(zoxide init --cmd cd zsh)"
 fi
 
 # =========================

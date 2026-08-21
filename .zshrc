@@ -182,7 +182,36 @@ fi
 
 alias vim='nvim'
 alias n='nvim'
-alias ni='nvim "$(fzf --height=100% --layout=reverse --border --preview="bat --style=numbers --color=always --line-range :500 {}" --preview-window=right:60%)"'
+
+ni() {
+  emulate -L zsh
+  setopt localoptions
+
+  local query selected
+  local -a matches
+
+  query="$*"
+
+  if [[ -n "$query" ]]; then
+    matches=("${(@f)$(rg --files --hidden --glob '!.git/*' --glob '!.jj/*' | rg -F -- "$query")}")
+    if (( ${#matches} == 1 )); then
+      nvim -- "${matches[1]}"
+      return
+    fi
+  fi
+
+  selected=$(
+    rg --files --hidden --glob '!.git/*' --glob '!.jj/*' |
+      fzf --height=100% --layout=reverse --border \
+        --preview='bat --style=numbers --color=always --line-range :500 {}' \
+        --preview-window=right:60% \
+        --query="$query" \
+        --select-1 --exit-0
+  ) || return
+
+  [[ -n "$selected" ]] && nvim -- "$selected"
+}
+
 
 alias c='clear'
 alias g='google'

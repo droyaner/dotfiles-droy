@@ -199,6 +199,44 @@ alias zmv='noglob zmv -W'
 
 alias lg='lazygit'
 
+docker_nuke() {
+    echo "Removing all Docker containers, images, volumes, networks, and build cache..."
+
+    echo
+    echo "Containers to be removed:"
+    docker ps -a --format 'ID={{.ID}} Name={{.Names}} Status={{.Status}}'
+
+    echo
+    echo "Docker disk usage before cleanup:"
+    docker system df
+
+    # Stop all running containers
+    docker ps -q | xargs -r docker stop
+
+    # Remove all containers
+    docker ps -aq | xargs -r docker rm -f
+
+    # Remove all Docker volumes explicitly
+    docker volume ls -q | xargs -r docker volume rm
+
+    # Remove all custom networks
+    docker network ls --filter type=custom -q | xargs -r docker network rm
+
+    # Remove unused images and build cache
+    docker system prune -a -f
+
+    echo
+    echo "Docker disk usage after cleanup:"
+    docker system df
+
+    echo
+    echo "Remaining volumes:"
+    docker volume ls
+
+    echo
+    echo "Docker cleanup completed."
+}
+
 # =========================
 #   Integrations
 # =========================
@@ -243,6 +281,39 @@ fgb() {
   if [ -n "$branch" ]; then
     git checkout "$branch"
   fi
+}
+
+fgc() {
+    local selected commit
+
+    selected=$(
+        git log --all \
+            --pretty=format:'%h%x09%an%x09%ad%x09%s' \
+            --date=format:'%Y-%m-%d' |
+        fzf \
+            --ansi \
+            --delimiter=$'\t' \
+            --with-nth=1,2,3,4 \
+            --prompt='Commit or author: ' \
+            --preview='
+                commit=$(echo {} | cut -f1)
+                echo "Commit details:"
+                git show --no-ext-diff --format=fuller --stat "$commit"
+                echo
+                echo "Changed files:"
+                git diff-tree --no-commit-id --name-status -r "$commit"
+            ' \
+            --preview-window='right,60%,wrap'
+    )
+
+    [ -z "$selected" ] && return
+
+    commit=$(echo "$selected" | cut -f1)
+
+    echo
+    git show --stat --oneline "$commit"
+    echo
+    git show --format=fuller --no-ext-diff "$commit"
 }
 
 # Extra aliases and secrets (optional)

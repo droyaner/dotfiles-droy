@@ -64,6 +64,12 @@ if command -v kubectl &> /dev/null; then
   zinit snippet OMZP::kubectx
 fi
 
+# Docker plugins (only if docker is installed)
+if command -v docker &> /dev/null; then
+  zinit snippet OMZP::docker
+  zinit snippet OMZP::docker-compose
+fi
+
 zinit snippet OMZP::command-not-found
 
 # Direnv plugin (only if direnv is installed)

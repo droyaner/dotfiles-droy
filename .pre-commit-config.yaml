@@ -29,6 +29,13 @@ repos:
         pass_filenames: false
         always_run: true
 
+      - id: nvim-healthcheck
+        name: Neovim Headless Health Check
+        entry: bash -c 'nvim --headless -u "$PWD/.config/nvim/init.lua" -i NONE -n "+checkhealth" "+wqall!"'
+        language: system
+        pass_filenames: false
+        always_run: true
+
   - repo: https://github.com/JohnnyMorganz/stylua
     rev: v0.20.0
     hooks:

@@ -57,6 +57,7 @@ zinit snippet OMZL::functions.zsh
 zinit snippet OMZL::termsupport.zsh
 zinit snippet OMZP::web-search
 zinit snippet OMZP::sudo
+zinit snippet OMZP::gh
 
 # Kubernetes plugins (only if kubectl is installed)
 if command -v kubectl &> /dev/null; then

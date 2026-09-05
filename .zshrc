@@ -189,6 +189,9 @@ fi
 
 alias vim='nvim'
 alias n='nvim'
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
 
 ni() {
   emulate -L zsh

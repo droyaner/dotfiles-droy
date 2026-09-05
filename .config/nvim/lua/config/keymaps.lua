@@ -24,8 +24,14 @@ vim.keymap.set("n", "<leader>fo", function()
 	require("fzf-lua").oldfiles()
 end, { desc = "Old files" })
 
--- tree
-vim.keymap.set("n", "<leader>e", ":NvimTreeFindFileToggle<cr>")
+-- Cheatsheet
+vim.keymap.set("n", "<leader>?", function()
+	local doc_dir = vim.fn.stdpath("config") .. "/doc"
+	if vim.fn.isdirectory(doc_dir) == 1 then
+		vim.cmd("silent! helptags " .. vim.fn.fnameescape(doc_dir))
+	end
+	vim.cmd("help cheatsheet")
+end, { desc = "Open cheatsheet" })
 
 -- Buffer navigation
 vim.keymap.set("n", "<leader>bn", ":bnext<cr>", { desc = "Next buffer" })

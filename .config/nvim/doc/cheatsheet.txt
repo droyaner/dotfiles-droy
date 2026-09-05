@@ -1,0 +1,32 @@
+*cheatsheet.txt*    Personal Neovim Cheatsheet
+
+*Droys cheatsheet*
+
+Useful commands:
+  :.!date                 Insert command output at cursor line
+  :%s/search/replace/g    Replace in whole file (with g = all matches)
+  :%s/search/replace/gc   Replace in whole file with confirmation
+
+Inner/outer text objects:
+  ci"    Change inside quotes
+  ca"    Change around quotes (incl. quotes)
+  ci(    Change inside parentheses
+  ca(    Change around parentheses
+  di{    Delete inside braces
+  da{    Delete around braces
+  viw    Select inner word
+  vaw    Select around word
+
+Marks:
+  ma         Set mark a at cursor (a-z)
+  'a         Jump to start of line of mark a
+  ''         Jump back to previous jump position
+  :marks     List all marks
+  :delmarks a    Delete mark a
+  :delmarks!     Delete all local marks
+
+Tips:
+  - Press <leader> and wait to discover mappings via which-key.
+  - Run :help for built-in docs and :checkhealth for diagnostics.
+
+vim:tw=78:ts=8:noet:ft=help:norl:

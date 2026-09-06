@@ -25,6 +25,13 @@ Marks:
   :delmarks a    Delete mark a
   :delmarks!     Delete all local marks
 
+Macros:
+  q<register>    Start/stop recording a macro in a register
+  @<register>    Execute the macro from the register
+  @@            Repeat the last macro
+  :reg          Show all registers
+  Macros record a series of keystrokes and are handy for repetitive edits.
+
 Tips:
   - Press <leader> and wait to discover mappings via which-key.
   - Run :help for built-in docs and :checkhealth for diagnostics.
